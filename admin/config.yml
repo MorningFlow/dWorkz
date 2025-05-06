@@ -1,33 +1,26 @@
-# config.yml - Modified for Single File Storage
-
 backend:
-  name: git-gateway # Connects to Netlify Identity and your Git repo
-  branch: main      # Or whichever branch you are using (e.g., master)
+  name: git-gateway
+  branch: main
 
-# Optional: Media files configuration (if you plan to add images to jobs later)
-# media_folder: "static/images/uploads" # Example: Store images in static/images/uploads
-# public_folder: "/images/uploads"      # The path used in the src attribute for display
+media_folder: "admin/uploads" # REQUIRED: Path in repo where media will be stored
+public_folder: "/uploads"     # REQUIRED: Path used in src attributes for media
 
 collections:
-  # Collection to manage all job posts within a single file
-  - name: "job_settings" # Internal name for this configuration set
-    label: "Job Posts"   # How this collection appears in the CMS sidebar
-    file: "admin/data.json" # Path to the single file managed by this collection
-    format: "json"          # The format of the file
-
-    # Define the fields for the entire file.
-    # We need one top-level field which is a list of job objects.
-    fields:
-      - label: "Job Listings" # Label for the list in the CMS UI
-        name: "jobs_list"     # **** THIS IS THE KEY for the array in data.json ****
+  - name: "job_posts"             # Can be any identifier name
+    label: "Job Posts"            # Label in CMS UI
+    file: "admin/data.json"     # Specifies the single file to manage
+    format: "json"
+    fields:                     # The top-level field MUST be the list container
+      - label: "Job Listings"     # Label for the list in CMS
+        name: "jobs_list"         # **KEY for the array in data.json**
         widget: "list"
-        summary: "{{fields.title}} | {{fields.company}}" # Preview shown for each item in the list within the CMS
-        # Define the fields for each individual job object within the list
+        summary: "{{fields.title}} | {{fields.company}}" # CMS list preview
+        # Fields for EACH item in the list:
         fields:
           - { label: "Job Title", name: "title", widget: "string" }
           - { label: "Company Name", name: "company", widget: "string" }
           - { label: "Location", name: "location", widget: "string" }
-          - { label: "Application Deadline", name: "deadline", widget: "datetime", format: "YYYY-MM-DD", date_format: "DD.MM.YYYY", time_format: false } # Ensure date only if needed
+          - { label: "Application Deadline", name: "deadline", widget: "datetime", format: "YYYY-MM-DD", date_format: "DD.MM.YYYY", time_format: false }
           - { label: "Job Type", name: "type", widget: "select", options: ["Government Job", "Private Job"] }
           - { label: "Full Job Description", name: "description", widget: "markdown" }
           - { label: "Application URL (Optional)", name: "url", widget: "string", required: false }
