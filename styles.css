@@ -1,0 +1,93 @@
+
+body {
+  font-family: Arial, sans-serif;
+  background-color: #f9f9f9;
+  margin: 0;
+  padding: 0;
+}
+
+header {
+  padding: 20px;
+  background-color: #333;
+  color: #fff;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  justify-content: center;
+}
+
+header input, header select {
+  padding: 10px;
+  border-radius: 5px;
+  border: none;
+}
+
+main {
+  padding: 20px;
+  display: grid;
+  gap: 20px;
+}
+
+.job-card {
+  background: white;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  cursor: pointer;
+}
+
+.modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.5);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.hidden {
+  display: none;
+}
+
+.modal-content {
+  background: white;
+  padding: 20px;
+  border-radius: 10px;
+  width: 90%;
+  max-height: 80%;
+  overflow-y: auto;
+}
+
+.description-scroll {
+  max-height: 200px;
+  overflow-y: auto;
+  margin-top: 10px;
+}
+
+.close-button {
+  float: right;
+  font-size: 24px;
+  cursor: pointer;
+}
+/* Animation for Job Cards */
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translate3d(0, 20px, 0); /* Start slightly lower and transparent */
+  }
+  to {
+    opacity: 1;
+    transform: translate3d(0, 0, 0); /* End at original position and fully opaque */
+  }
+}
+
+/* Class to apply the animation */
+.job-card-animate {
+  /* Apply the animation, run it once, keep the final state */
+  animation: fadeInUp 0.5s ease-out forwards;
+  /* Start transparent before the animation kicks in */
+  opacity: 0;
+}
