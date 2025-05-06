@@ -6,21 +6,23 @@ media_folder: "admin/uploads" # REQUIRED: Path in repo where media will be store
 public_folder: "/uploads"     # REQUIRED: Path used in src attributes for media
 
 collections:
-  - name: "job_posts"             # Can be any identifier name
-    label: "Job Posts"            # Label in CMS UI
-    file: "admin/data.json"     # Specifies the single file to manage
-    format: "json"
-    fields:                     # The top-level field MUST be the list container
-      - label: "Job Listings"     # Label for the list in CMS
-        name: "jobs_list"         # **KEY for the array in data.json**
-        widget: "list"
-        summary: "{{fields.title}} | {{fields.company}}" # CMS list preview
-        # Fields for EACH item in the list:
+  - name: "job_posts"
+    label: "Job Posts"
+    files:
+      - label: "Job Data"
+        name: "job_data"
+        file: "admin/data.json"
+        format: "json"
         fields:
-          - { label: "Job Title", name: "title", widget: "string" }
-          - { label: "Company Name", name: "company", widget: "string" }
-          - { label: "Location", name: "location", widget: "string" }
-          - { label: "Application Deadline", name: "deadline", widget: "datetime", format: "YYYY-MM-DD", date_format: "DD.MM.YYYY", time_format: false }
-          - { label: "Job Type", name: "type", widget: "select", options: ["Government Job", "Private Job"] }
-          - { label: "Full Job Description", name: "description", widget: "markdown" }
-          - { label: "Application URL (Optional)", name: "url", widget: "string", required: false }
+          - label: "Job Listings"
+            name: "jobs_list"
+            widget: "list"
+            summary: "{{fields.title}} | {{fields.company}}"
+            fields:
+              - { label: "Job Title", name: "title", widget: "string" }
+              - { label: "Company Name", name: "company", widget: "string" }
+              - { label: "Location", name: "location", widget: "string" }
+              - { label: "Application Deadline", name: "deadline", widget: "datetime", format: "YYYY-MM-DD", date_format: "DD.MM.YYYY", time_format: false }
+              - { label: "Job Type", name: "type", widget: "select", options: ["Government Job", "Private Job"] }
+              - { label: "Full Job Description", name: "description", widget: "markdown" }
+              - { label: "Application URL (Optional)", name: "url", widget: "string", required: false }
